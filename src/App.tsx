@@ -11,7 +11,7 @@ const rotas = createBrowserRouter([
     element: <Home />
   },
   {
-    path: '/foods',
+    path: '/foods/:id',
     element: <PageFoods />
   }
 ])

@@ -5,7 +5,7 @@ import japonesa from '../../assets/images/japonesa.png'
 import italiana from '../../assets/images/italiana.png'
 import Header from '../../components/Header'
 
-const lojas: Restaurante[] = [
+export const lojas: Restaurante[] = [
   {
     id: 1,
     title: 'Hioki Sushi',
@@ -13,7 +13,7 @@ const lojas: Restaurante[] = [
     description:
       'Peça já o melhor da culinária japonesa no conforto da sua casa! Sushis frescos, sashimis deliciosos e pratos quentes irresistíveis. Entrega rápida, embalagens cuidadosas e qualidade garantida.Experimente o Japão sem sair do lar com nosso delivery!',
     image: japonesa,
-    infos: ['Destaque da semana', 'Japonesa']
+    infos: ['Japonesa', 'Destaque da semana']
   },
   {
     id: 2,

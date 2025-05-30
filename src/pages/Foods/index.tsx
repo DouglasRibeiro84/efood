@@ -1,8 +1,10 @@
+import { useParams } from 'react-router-dom'
 import Header from '../../components/Header'
 import Comidas from '../../models/Comidas'
 
 import pizza from '../..//assets/images/pizza.png'
 import FoodList from '../../components/FoodsList'
+import { lojas } from '../Homes'
 
 const comidas: Comidas[] = [
   {
@@ -49,11 +51,24 @@ const comidas: Comidas[] = [
   }
 ]
 
-const PageFoods = () => (
-  <>
-    <Header type="section" />
-    <FoodList foods={comidas} />
-  </>
-)
+const PageFoods = () => {
+  const { id } = useParams<{ id: string }>()
+
+  const loja = lojas.find((item) => item.id === Number(id))
+
+  if (!loja) return <p>Loja não encontrada</p>
+
+  return (
+    <>
+      <Header
+        type="section"
+        image={loja.image}
+        title={loja.title}
+        infos={loja.infos}
+      />
+      <FoodList foods={comidas} />
+    </>
+  )
+}
 
 export default PageFoods

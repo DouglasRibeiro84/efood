@@ -18,13 +18,16 @@ export const CardContainer = styled.div`
 `
 
 export const CardHeader = styled.div`
-  font-size: 18px;
   font-weight: bold;
   margin-bottom: 16px;
   display: flex;
   align-items: center;
   justify-content: space-between;
   width: 100%;
+
+  h3 {
+    font-size: 18px;
+  }
 
   div {
     display: flex;

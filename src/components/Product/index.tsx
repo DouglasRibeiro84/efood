@@ -4,6 +4,7 @@ import estrela from '../../assets/images/estrela.svg'
 import { Card, CardContainer, CardHeader, Descricao, Infos } from './styles'
 
 type Props = {
+  id: number
   title: string
   description: string
   infos: string[]
@@ -11,7 +12,7 @@ type Props = {
   nota: number
 }
 
-const Product = ({ title, description, infos, image, nota }: Props) => (
+const Product = ({ title, description, infos, image, nota, id }: Props) => (
   <Card>
     <img src={image} alt={title} />
     <Infos>
@@ -30,7 +31,7 @@ const Product = ({ title, description, infos, image, nota }: Props) => (
         </div>
       </CardHeader>
       <Descricao>{description}</Descricao>
-      <Tag type="link" to="/foods">
+      <Tag type="link" to={`/foods/${id}`}>
         Saiba mais
       </Tag>
     </CardContainer>

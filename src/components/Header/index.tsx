@@ -1,15 +1,17 @@
-import { Apresentacao, HeaderBar, Titulo } from './styles'
+import { Apresentacao, HeaderBar, Title, Titulo } from './styles'
 
 import logo from '../../assets/images/logo.svg'
 import fundo from '../../assets/images/fundo.svg'
-import apresentação from '../../assets/images/apresentacao.svg'
 import { Link } from 'react-router-dom'
 
 export type Props = {
   type: 'home' | 'section'
+  title?: string
+  image?: string
+  infos?: string[]
 }
 
-const Header = ({ type }: Props) => {
+const Header = ({ type, title, image, infos }: Props) => {
   if (type === 'home') {
     return (
       <HeaderBar type="home" style={{ backgroundImage: `url(${fundo})` }}>
@@ -34,9 +36,16 @@ const Header = ({ type }: Props) => {
           <p>0 produtos no carrinho</p>
         </div>
       </HeaderBar>
-      <Apresentacao
-        style={{ backgroundImage: `url(${apresentação})` }}
-      ></Apresentacao>
+      <Apresentacao style={{ backgroundImage: `url(${image})` }}>
+        <div>
+          <div className="container">
+            <Title>
+              <h4>{infos && infos[0]}</h4>
+              <h3>{title}</h3>
+            </Title>
+          </div>
+        </div>
+      </Apresentacao>
     </>
   )
 }
