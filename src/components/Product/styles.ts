@@ -7,13 +7,24 @@ export const Card = styled.div`
   color: ${cores.corPrincipal};
   border: 1px solid ${cores.corPrincipal};
   position: relative;
+  height: auto;
+  width: 472px;
 
   ${TagContainer} {
     margin-right: 8px;
   }
+  > img {
+    width: 100%;
+    height: 218px;
+    object-fit: cover;
+  }
 `
 export const CardContainer = styled.div`
   padding: 8px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   padding-top: 2px;
 `
 

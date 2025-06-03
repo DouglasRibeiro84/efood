@@ -13,6 +13,7 @@ export const TagContainer = styled.div<Props>`
   font-size: 12px;
   padding: 6px 4px;
   display: inline-block;
+  width: auto;
 `
 export const TagLink = styled(Link)`
   background-color: ${cores.corPrincipal};
@@ -23,4 +24,5 @@ export const TagLink = styled(Link)`
   padding: 4px 6px;
   display: inline-block;
   text-decoration: none;
+  max-width: fit-content;
 `

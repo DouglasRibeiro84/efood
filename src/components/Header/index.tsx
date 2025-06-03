@@ -8,7 +8,7 @@ export type Props = {
   type: 'home' | 'section'
   title?: string
   image?: string
-  infos?: string[]
+  infos?: string
 }
 
 const Header = ({ type, title, image, infos }: Props) => {
@@ -40,7 +40,7 @@ const Header = ({ type, title, image, infos }: Props) => {
         <div>
           <div className="container">
             <Title>
-              <h4>{infos && infos[0]}</h4>
+              <h4>{infos}</h4>
               <h3>{title}</h3>
             </Title>
           </div>

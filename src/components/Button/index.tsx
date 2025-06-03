@@ -1,7 +1,8 @@
+import { ReactNode } from 'react'
 import { ContainerBtn } from './styles'
 
 export type Props = {
-  children: string
+  children: ReactNode
   to?: string
   onClick?: () => void
 }
