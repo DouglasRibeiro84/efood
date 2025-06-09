@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { cores } from '../../styles'
+import { breakpoints, cores } from '../../styles'
 
 import { Props } from '.'
 
@@ -17,11 +17,23 @@ export const HeaderBar = styled.header<Props>`
     color: ${cores.corPrincipal};
   }
 
+  p {
+    cursor: pointer;
+  }
+
   .container {
     display: flex;
     align-items: center;
     justify-content: space-between;
     font-size: 18px;
+
+    @media (max-width: ${breakpoints.desktop}) {
+      flex-direction: column;
+
+      img {
+        margin: 16px 0;
+      }
+    }
   }
 `
 export const Titulo = styled.h1`

@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { cores } from '../../styles'
+import { breakpoints, cores } from '../../styles'
 import { ContainerBtn } from '../Button/styles'
 
 export const FoodCard = styled.div`
@@ -61,6 +61,12 @@ export const ModalContent = styled(FoodCard)`
   justify-content: space-between;
   padding: 24px;
 
+  @media (max-width: ${breakpoints.desktop}) {
+    display: block;
+    padding: 16px;
+    padding-top: 30px;
+  }
+
   > img {
     width: 280px;
     height: 280px;
@@ -72,6 +78,13 @@ export const ModalContent = styled(FoodCard)`
       top: 8px;
       right: 8px;
       cursor: pointer;
+    }
+  }
+
+  @media (max-width: ${breakpoints.desktop}) {
+    > img {
+      width: 100%;
+      height: 280px;
     }
   }
 `
@@ -95,5 +108,13 @@ export const InfosFood = styled.div`
     width: auto;
     padding: 4px 8px;
     margin-top: 16px;
+  }
+
+  @media (max-width: ${breakpoints.desktop}) {
+    margin: 0;
+
+    h4 {
+      margin-top: 8px;
+    }
   }
 `

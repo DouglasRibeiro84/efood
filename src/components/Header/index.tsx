@@ -1,8 +1,13 @@
+import { useDispatch, useSelector } from 'react-redux'
+
 import { Apresentacao, HeaderBar, Title, Titulo } from './styles'
 
 import logo from '../../assets/images/logo.svg'
 import fundo from '../../assets/images/fundo.svg'
 import { Link } from 'react-router-dom'
+
+import { open } from '../../store/reducers/cart'
+import { RootReducer } from '../../store'
 
 export type Props = {
   type: 'home' | 'section'
@@ -12,6 +17,13 @@ export type Props = {
 }
 
 const Header = ({ type, title, image, infos }: Props) => {
+  const dispatch = useDispatch()
+  const { items } = useSelector((state: RootReducer) => state.cart)
+
+  const openCart = () => {
+    dispatch(open())
+  }
+
   if (type === 'home') {
     return (
       <HeaderBar type="home" style={{ backgroundImage: `url(${fundo})` }}>
@@ -33,7 +45,7 @@ const Header = ({ type, title, image, infos }: Props) => {
           <Link to="/">
             <img src={logo} alt="" />
           </Link>
-          <p>0 produtos no carrinho</p>
+          <p onClick={openCart}>{items.length} produtos no carrinho</p>
         </div>
       </HeaderBar>
       <Apresentacao style={{ backgroundImage: `url(${image})` }}>

@@ -1,3 +1,6 @@
+import { useState } from 'react'
+import { useDispatch } from 'react-redux'
+
 import Button from '../Button'
 import {
   FoodCard,
@@ -8,17 +11,23 @@ import {
 } from './styles'
 
 import fechar from '../../assets/images/close 1.svg'
-import { useState } from 'react'
+
+import { add, open } from '../../store/reducers/cart'
+
+import { CardapioItem } from '../../pages/Homes'
 
 type Props = {
-  title: string
-  description: string
-  image: string
-  porcao: string
-  preco: number
+  food: CardapioItem
 }
 
-const Foods = ({ title, description, image, porcao, preco }: Props) => {
+export const formataPreco = (preco: number) => {
+  return new Intl.NumberFormat('pt-BR', {
+    style: 'currency',
+    currency: 'BRL'
+  }).format(preco)
+}
+
+const Foods = ({ food }: Props) => {
   const [modalAberta, setModalAberta] = useState(false)
 
   const getDescricao = (description: string) => {
@@ -28,20 +37,20 @@ const Foods = ({ title, description, image, porcao, preco }: Props) => {
     return description
   }
 
-  const formataPreco = (preco: number) => {
-    return new Intl.NumberFormat('pt-BR', {
-      style: 'currency',
-      currency: 'BRL'
-    }).format(preco)
+  const dispatch = useDispatch()
+
+  const addToCart = () => {
+    dispatch(add(food))
+    dispatch(open())
   }
 
   return (
     <>
       <FoodCard>
-        <img src={image} alt={title} />
+        <img src={food.foto} alt={food.nome} />
         <div>
-          <h3>{title}</h3>
-          <FoodDescription>{getDescricao(description)}</FoodDescription>
+          <h3>{food.nome}</h3>
+          <FoodDescription>{getDescricao(food.descricao)}</FoodDescription>
           <Button
             onClick={() => {
               setModalAberta(true)
@@ -54,10 +63,10 @@ const Foods = ({ title, description, image, porcao, preco }: Props) => {
       <Modal className={modalAberta ? 'visivel' : ''}>
         <div className="overlay" onClick={() => setModalAberta(false)}></div>
         <ModalContent className="container">
-          <img src={image} alt="" />
+          <img src={food.foto} alt="" />
           <InfosFood>
             <header>
-              <h4>{title}</h4>
+              <h4>{food.nome}</h4>
               <img
                 src={fechar}
                 alt="Fechar"
@@ -65,10 +74,17 @@ const Foods = ({ title, description, image, porcao, preco }: Props) => {
               />
             </header>
             <div>
-              <p>{description}</p>
-              <span>Serve: de {porcao}</span>
+              <p>{food.descricao}</p>
+              <span>Serve: de {food.porcao}</span>
             </div>
-            <Button>{'Adicionar ao carrinho - ' + formataPreco(preco)} </Button>
+            <Button
+              onClick={() => {
+                addToCart()
+                setModalAberta(false)
+              }}
+            >
+              {'Adicionar ao carrinho - ' + formataPreco(food.preco)}
+            </Button>
           </InfosFood>
         </ModalContent>
       </Modal>
