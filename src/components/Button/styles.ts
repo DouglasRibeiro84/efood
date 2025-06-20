@@ -12,4 +12,6 @@ export const ContainerBtn = styled(Link)`
   font-weight: 700;
   padding: 4px 0;
   text-decoration: none;
+  border: none;
+  cursor: pointer;
 `

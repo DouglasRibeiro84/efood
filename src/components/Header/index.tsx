@@ -39,9 +39,7 @@ const Header = ({ type, title, image, infos }: Props) => {
     <>
       <HeaderBar type="section" style={{ backgroundImage: `url(${fundo})` }}>
         <div className="container">
-          <Link to="/">
-            <a href="">Restaurantes</a>
-          </Link>
+          <Link to="/">Restaurantes</Link>
           <Link to="/">
             <img src={logo} alt="" />
           </Link>

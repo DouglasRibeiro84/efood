@@ -4,14 +4,19 @@ import Header from '../../components/Header'
 import FoodList from '../../components/FoodsList'
 
 import { useGetFoodsQuery } from '../../services/api'
-import Cart from '../../components/cart'
+import Cart from '../../components/AsideBar'
+import Loader from '../../components/Loader'
 
 const PageFoods = () => {
-  const { id } = useParams<{ id: string }>()
+  type FoodParams = {
+    id: string
+  }
 
-  const { data: loja } = useGetFoodsQuery(id!)
+  const { id } = useParams() as FoodParams
 
-  if (!loja) return <h3>Carregando ...</h3>
+  const { data: loja, isLoading: loadingFoods } = useGetFoodsQuery(id)
+
+  if (!loja) return <Loader />
 
   return (
     <>
@@ -21,7 +26,7 @@ const PageFoods = () => {
         title={loja.titulo}
         infos={loja.tipo}
       />
-      <FoodList foods={loja.cardapio} />
+      <FoodList foods={loja.cardapio} isLoading={loadingFoods} />
       <Cart />
     </>
   )

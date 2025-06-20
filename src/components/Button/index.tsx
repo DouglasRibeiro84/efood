@@ -5,10 +5,24 @@ export type Props = {
   children: ReactNode
   to?: string
   onClick?: () => void
+  type?: 'button' | 'submit'
+  disabled?: boolean
 }
 
-const Button = ({ children, to, onClick }: Props) => (
-  <ContainerBtn to={to as string} onClick={onClick}>
+const Button = ({
+  children,
+  to,
+  onClick,
+  type = 'button',
+  disabled
+}: Props) => (
+  <ContainerBtn
+    as="button"
+    type={type}
+    to={to as string}
+    onClick={onClick}
+    disabled={disabled}
+  >
     {children}
   </ContainerBtn>
 )

@@ -1,4 +1,5 @@
 import Header from '../../components/Header'
+import Loader from '../../components/Loader'
 import ProductList from '../../components/ProdutcList'
 import { useGetRestaurantsQuery } from '../../services/api'
 
@@ -23,16 +24,17 @@ export type Restaurante = {
 }
 
 const Home = () => {
-  const { data: lojas } = useGetRestaurantsQuery()
+  const { data: lojas, isLoading: loadingRestaurants } =
+    useGetRestaurantsQuery()
 
   if (!lojas) {
-    return <h3>Carregando ...</h3>
+    return <Loader />
   }
 
   return (
     <>
       <Header type="home" />
-      <ProductList restaurantes={lojas} />
+      <ProductList restaurantes={lojas} isLoading={loadingRestaurants} />
     </>
   )
 }
