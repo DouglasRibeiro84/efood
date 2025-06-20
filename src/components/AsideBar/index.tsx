@@ -4,7 +4,7 @@ import { useState } from 'react'
 import { RootReducer } from '../../store'
 import { close } from '../../store/reducers/cart'
 
-import Cart from '../Cart'
+import CartContainer from '../Cart'
 import Checkout from '../Checkout'
 
 import { Container, Overlay, SideBar } from './styles'
@@ -24,7 +24,9 @@ const AsideBar = () => {
     <Container className={isOpen ? 'is-open' : ''}>
       <Overlay onClick={closeCart} />
       <SideBar>
-        {!showCheckout && <Cart onContinue={() => setShowCheckout(true)} />}
+        {!showCheckout && (
+          <CartContainer onContinue={() => setShowCheckout(true)} />
+        )}
         {showCheckout && <Checkout onBack={() => setShowCheckout(false)} />}
       </SideBar>
     </Container>

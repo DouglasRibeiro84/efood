@@ -11,7 +11,7 @@ type CartProps = {
   onContinue: () => void
 }
 
-const Cart = ({ onContinue }: CartProps) => {
+const CartContainer = ({ onContinue }: CartProps) => {
   const { items } = useSelector((state: RootReducer) => state.cart)
 
   const getTotalPrice = () => {
@@ -57,4 +57,4 @@ const Cart = ({ onContinue }: CartProps) => {
   )
 }
 
-export default Cart
+export default CartContainer
