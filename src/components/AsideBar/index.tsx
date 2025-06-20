@@ -4,10 +4,10 @@ import { useState } from 'react'
 import { RootReducer } from '../../store'
 import { close } from '../../store/reducers/cart'
 
-import CartContainer from '../Cart'
 import Checkout from '../Checkout'
 
 import { Container, Overlay, SideBar } from './styles'
+import CartContainer from '../Cart'
 
 const AsideBar = () => {
   const { isOpen } = useSelector((state: RootReducer) => state.cart)
