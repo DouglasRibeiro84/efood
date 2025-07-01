@@ -53,18 +53,66 @@ const Checkout = ({ onBack, goPayment }: CheckoutProps) => {
       expYear: ''
     },
     validationSchema: Yup.object({
-      receiver: Yup.string().min(3).required('Campo obrigatório'),
-      address: Yup.string().min(5).required('Campo obrigatório'),
-      city: Yup.string().min(3).required('Campo obrigatório'),
-      zipCode: Yup.string().length(9).required('Campo obrigatório'),
-      addressNumber: Yup.string().min(1).required('Campo obrigatório'),
-      complement: Yup.string().min(3),
+      receiver: Yup.string()
+        .min(3, 'Mínimo de 3 caracteres')
+        .required('Campo obrigatório'),
 
-      cardName: Yup.string().min(5).required('Campo obrigatório'),
-      cardNumber: Yup.string().min(3).required('Campo obrigatório'),
-      cvv: Yup.string().min(3).required('Campo obrigatório'),
-      expMonth: Yup.string().min(2).required('Campo obrigatório'),
-      expYear: Yup.string().min(2).required('Campo obrigatório')
+      address: Yup.string()
+        .min(5, 'Mínimo de 5 caracteres')
+        .required('Campo obrigatório'),
+
+      city: Yup.string()
+        .min(3, 'Mínimo de 3 caracteres')
+        .required('Campo obrigatório'),
+
+      zipCode: Yup.string()
+        .test('zipCode-valid', 'CEP inválido', (value) => {
+          const cleaned = value?.replace(/[^0-9]/g, '') || ''
+          return cleaned.length === 8
+        })
+        .required('Campo obrigatório'),
+
+      addressNumber: Yup.string()
+        .min(1, 'Informe um número válido')
+        .required('Campo obrigatório'),
+
+      complement: Yup.string().min(3, 'Mínimo de 3 caracteres').notRequired(),
+
+      cardName: Yup.string()
+        .min(3, 'Mínimo de 3 caracteres')
+        .required('Campo obrigatório'),
+
+      cardNumber: Yup.string()
+        .test('cardNumber-valid', 'Número do cartão inválido', (value) => {
+          const cleaned = value?.replace(/\s/g, '').replace(/_/g, '') || ''
+          return cleaned.length === 16
+        })
+        .required('Campo obrigatório'),
+
+      cvv: Yup.string()
+        .test('cvv-valid', 'CVV inválido', (value) => {
+          const cleaned = value?.replace(/_/g, '') || ''
+          return cleaned.length === 3
+        })
+        .required('Campo obrigatório'),
+
+      expMonth: Yup.string()
+        .test('expMonth-valid', 'Mês inválido', (value) => {
+          const cleaned = value?.replace(/_/g, '') || ''
+          return (
+            cleaned.length === 2 &&
+            parseInt(cleaned, 10) >= 1 &&
+            parseInt(cleaned, 10) <= 12
+          )
+        })
+        .required('Campo obrigatório'),
+
+      expYear: Yup.string()
+        .test('expYear-valid', 'Ano inválido', (value) => {
+          const cleaned = value?.replace(/_/g, '') || ''
+          return cleaned.length === 2
+        })
+        .required('Campo obrigatório')
     }),
     onSubmit: (values) => {
       console.log('Enviando compra:', {
